@@ -1,37 +1,25 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-        int n=fruits.size(),max_num_fruits=0;
-        int basket1=fruits[0], basket2 = -1;
-        int last_fruit=fruits[0], last_fruit_index=0;
-        int left=0,right=0;
-        
+        int n=fruits.size();
+        unordered_map<int,int> m1;
+        int right=0,left=0;
+        int max_len=0;
 
         while(right<n){
-          if((fruits[right]!= basket1) && basket2== -1){
-            basket2=fruits[right];
-            last_fruit=fruits[right];
-            last_fruit_index=right;
-          }else if((fruits[right]!= basket1) && (fruits[right]!= basket2) ){
-
-              basket1=last_fruit;
-              basket2=fruits[right];
-              left=last_fruit_index;
-              last_fruit=fruits[right];
-              last_fruit_index=right;
-
-          }else {
-
-            if(fruits[right]!=last_fruit){
-              last_fruit=fruits[right];
-              last_fruit_index=right;
+          m1[fruits[right]]++;
+          if(m1.size()>2){
+            m1[fruits[left]]--;
+            if(m1[fruits[left]]==0){
+              m1.erase(fruits[left]);
             }
-
+            left++;
           }
-          max_num_fruits=max(max_num_fruits,(right-left)+1);
-          right=right+1;
-        
+          if(m1.size()<=2){
+            max_len=max(max_len,(right-left)+1);
+          }
+          right+=1;
         }
-        return max_num_fruits;
+        return max_len;
     }
 };
