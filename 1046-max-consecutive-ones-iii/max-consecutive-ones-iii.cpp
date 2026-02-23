@@ -18,10 +18,7 @@ public:
                 }
                 left=left+1;
             }
-            if(zero<=k){
-                max_cons=max(max_cons,(right-left)+1);
-            }
-            
+            max_cons=max(max_cons,(right-left)+1);
             right=right+1;
         }
         return max_cons;
