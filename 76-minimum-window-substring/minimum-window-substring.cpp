@@ -1,7 +1,10 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        
+
+        if(s.empty() || t.empty() || s.size()<t.size()){
+            return "";
+        }
         int freq_t[255]={0};
         int min_len=INT_MAX;
         int string_index=-1;
