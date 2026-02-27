@@ -1,13 +1,14 @@
 class Solution {
 private:
     int Number_Of_Odd_Subarrays(vector<int>& nums, int k) {
+        if(k<0){
+            return 0;
+        }
         int left=0,right=0;
         int sum=0,count=0;
         
         while(right<nums.size() ){
-            if(k<0){
-                return 0;
-            }
+
             sum+=(nums[right]%2);
             while(sum>k){
                 sum-=(nums[left]%2);
