@@ -10,7 +10,7 @@ public:
 
         
 
-        while(index<target.size()){
+        while(index<target.size() && index<n){
             if(target[index] == check_num){
                 stack_operations.push_back("Push");
                 
