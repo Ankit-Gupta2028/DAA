@@ -10,13 +10,12 @@ public:
 
         
 
-        while(index<target.size() && index<n){
-            if(target[index] == check_num){
-                stack_operations.push_back("Push");
-                
+        while(index<target.size() && index<=n){
+             stack_operations.push_back("Push");
+            if(target[index] == check_num){  
                 index+=1;
             }else{
-                stack_operations.push_back("Push");
+               
                 stack_operations.push_back("Pop");
             }
             
