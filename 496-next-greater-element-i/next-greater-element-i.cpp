@@ -18,10 +18,11 @@ public:
             }
             s1.push(nums2[i]);
        }
+        vector<int> ans;
        for(int i=0;i<nums1.size();i++){
-            nums1[i]=m1[nums1[i]];
+            ans.push_back(m1[nums1[i]]);
        }
-       return nums1;
+       return ans;
        
     }
 };
