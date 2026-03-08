@@ -12,6 +12,7 @@ public:
     bool isValid(string s) {
         
         stack<char> s1;
+        
         for(int i=0;i<s.size();i++){
             if(s[i]=='(' || s[i]=='{' || s[i]=='['){
                 s1.push(s[i]);
@@ -28,10 +29,7 @@ public:
 
             }
         }
-        if(!s1.empty()){
-            return false;
-        }
-        return true;
+        return s1.empty();
 
     }
 };
