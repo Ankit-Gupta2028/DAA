@@ -49,8 +49,8 @@ public:
         for(int i=0;i<n;i++){
             int left=i-pse[i];
             int right=nse[i]-i;
-            long long freq=left*right*1LL;
-            int curr_sum=(freq*arr[i]*1LL)%mod;
+            long long freq=(1LL*left*right)%mod;
+            long long curr_sum=(freq*arr[i])%mod;
             sum=(sum+curr_sum)%mod;
         }
         return sum;
