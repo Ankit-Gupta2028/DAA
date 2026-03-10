@@ -5,15 +5,14 @@ public:
         long long sum=0;
 
         for(int i=0;i<n;i++){
-            long long MAX=INT_MIN;
-            long long MIN=INT_MAX;
+            long long MAX=nums[i];
+            long long MIN=nums[i];
             for(int j=i;j<n;j++){
 
                 MAX=max(MAX,(long long)nums[j]);
                 MIN=min(MIN,(long long)nums[j]);
                 sum=sum+(MAX-MIN);
             }
-
         }
         return sum;
     }
