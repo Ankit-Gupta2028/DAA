@@ -7,7 +7,7 @@ public:
 
         for(int i=0;i<n;i++){
             char curr=num[i];
-            while(!s1.empty() && (curr-'0') < (s1.top()-'0') && check_k<k ){
+            while(!s1.empty() && (curr) < (s1.top()) && check_k<k ){
                 s1.pop();
                 check_k+=1;
             }
@@ -18,11 +18,9 @@ public:
             s1.pop();
             check_k+=1;
         }
-        if(s1.size()==0){
-            return "0";
-        }
 
-        string ans;
+
+        string ans="";
         int n1=s1.size();
         for(int i=0;i<n1;i++){
             ans+=s1.top();
