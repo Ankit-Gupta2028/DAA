@@ -26,14 +26,15 @@ public:
             ans+=s1.top();
             s1.pop();
         }
-        while(!ans.empty() && ans.back()=='0'){
-            ans.pop_back();
+        reverse(ans.begin(),ans.end());
+        int i=0;
+        while(i<ans.size() && ans[i]=='0'){
+            ans.erase(0,1);
         }
         if(ans.size()==0){
             return "0";
         }
-
-        reverse(ans.begin(),ans.end());
+        
         return ans;     
  
     }
