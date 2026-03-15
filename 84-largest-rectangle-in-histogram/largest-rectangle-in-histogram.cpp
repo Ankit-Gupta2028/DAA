@@ -48,11 +48,10 @@ public:
 
         for(int i=0;i<n;i++){
             int num=heights[i];
-            int left=i-pse[i];
-            int right=(nse[i]-i)-1;
-            int area=num*(left+right);
+            int area=num*(nse[i]-pse[i]-1);
             LRA=max(LRA,area);
         }
         return LRA;
     }
+    
 };
