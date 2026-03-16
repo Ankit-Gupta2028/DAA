@@ -9,19 +9,19 @@ public:
 
         for(int i=0;i<n;i++){
             int curr=heights[i];
-            while(!s1.empty() && curr<heights[s1.top()]){
+            while(!s1.empty() && curr <= heights[s1.top()]){
 
                 int index_pop_ele=s1.top();
                 s1.pop();
-                right=i-index_pop_ele;
+                right=i;
 
                 if(s1.empty()){
-                    left=(index_pop_ele-(-1))-1;
+                    left= -1;
                 }else{
-                    left=(index_pop_ele-s1.top())-1;
+                    left= s1.top();
                 }
 
-                LRH=max(LRH,(heights[index_pop_ele]*(left+right)));
+                LRH=max(LRH,(heights[index_pop_ele]*(right-left-1)));
               
             }
             s1.push(i);
@@ -30,16 +30,16 @@ public:
 
             int index_pop_ele=s1.top();
             s1.pop();
-            right=n-index_pop_ele;
+            right=n;
 
             if(s1.empty()){
-                left=(index_pop_ele-(-1))-1;
+                left=-1;
             }else{
-                left=(index_pop_ele-s1.top())-1;
+                left=s1.top();
             }
 
-            LRH=max(LRH,(heights[index_pop_ele]*(left+right)));
+            LRH=max(LRH,(heights[index_pop_ele]*(right-left-1)));
         }
-        return LRH; 
+        return LRH;
     }
 };
