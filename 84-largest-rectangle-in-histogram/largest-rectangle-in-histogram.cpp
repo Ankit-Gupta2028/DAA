@@ -1,57 +1,45 @@
 class Solution {
-private:
-    vector<int> NSE(vector<int> &heights){
-        int n=heights.size();
-        vector<int> ans(n);
-        stack<int> s1;
-       
-
-        for(int i=n-1;i>=0;i--){
-            int ele=heights[i];
-            while(!s1.empty() && heights[s1.top()]>=ele){
-                s1.pop();
-            }
-            if(s1.empty()){
-                ans[i]=n;
-            }else{
-                ans[i]=s1.top();
-            }
-            s1.push(i);
-        }
-        return ans;
-    }
-    vector<int> PSE(vector<int> &heights){
-        vector<int> ans;
-        stack<int> s1;
-        int n=heights.size();
-        for(int i=0;i<n;i++){
-            int ele=heights[i];
-            while(!s1.empty() && heights[s1.top()]>=ele){
-                s1.pop();
-            }
-            if(s1.empty()){
-                ans.push_back(-1);
-            }else{
-                ans.push_back(s1.top());
-            }
-            s1.push(i);
-        }
-        return ans;
-    }
 public:
     int largestRectangleArea(vector<int>& heights) {
-        vector<int> pse=PSE(heights);
-        vector<int> nse=NSE(heights);
         int n=heights.size();
+        stack<int> s1;
+        int left=0,right=0;
+        int LRH=0;
 
-        int LRA=0;
 
         for(int i=0;i<n;i++){
-            int num=heights[i];
-            int area=num*(nse[i]-pse[i]-1);
-            LRA=max(LRA,area);
+            int curr=heights[i];
+            while(!s1.empty() && curr<heights[s1.top()]){
+
+                int index_pop_ele=s1.top();
+                s1.pop();
+                right=i-index_pop_ele;
+
+                if(s1.empty()){
+                    left=(index_pop_ele-(-1))-1;
+                }else{
+                    left=(index_pop_ele-s1.top())-1;
+                }
+
+                LRH=max(LRH,(heights[index_pop_ele]*(left+right)));
+              
+            }
+            s1.push(i);
         }
-        return LRA;
+        while(!s1.empty()){
+
+            int index_pop_ele=s1.top();
+            s1.pop();
+            right=n-index_pop_ele;
+
+            if(s1.empty()){
+                left=(index_pop_ele-(-1))-1;
+            }else{
+                left=(index_pop_ele-s1.top())-1;
+            }
+
+            LRH=max(LRH,(heights[index_pop_ele]*(left+right)));
+        }
+        return LRH; 
     }
-    
 };
