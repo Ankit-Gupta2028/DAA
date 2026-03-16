@@ -36,33 +36,26 @@ private:
     }
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
-        int n=matrix.size();
+        int max_rectangular=0;
         int m=matrix[0].size();
-        vector<vector<int>> histro(n,vector<int>(m));
-        
-        for(int i=0;i<m;i++){
+        int n=matrix.size();
+        vector<int> histograms(m,0);
 
-            int curr=matrix[0][i]-'0';
-            histro[0][i]=curr;
+        for(int i=0;i<n;i++){
 
-            for(int j=1;j<n;j++){
-
-                if((matrix[j][i]-'0')==1){
-                    curr+=1;
-                    histro[j][i]=curr;
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]-'0' == 1){
+                    histograms[j]+=1;
+                   
                 }else{
-                    curr=0;
-                    histro[j][i]=curr;
+
+                    histograms[j]=0;
                 }
             }
-
+            max_rectangular=max(max_rectangular,largest_histro_rec(histograms));
         }
+       
 
-        int max_rectangle=0;
-        for(int i=0;i<n;i++){
-            int curr_max=largest_histro_rec(histro[i]);
-            max_rectangle=max(max_rectangle,curr_max);
-        }
-        return max_rectangle;
+        return max_rectangular;
     }
 };
