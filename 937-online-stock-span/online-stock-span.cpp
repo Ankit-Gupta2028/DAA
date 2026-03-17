@@ -12,7 +12,7 @@ public:
             s1.pop();
         }
         s1.push({price,spam});
-        return spam;
+        return s1.top().second;
     }
 };
 
