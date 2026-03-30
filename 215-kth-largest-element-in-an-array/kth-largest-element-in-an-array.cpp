@@ -1,46 +1,44 @@
 class Solution {
-private:
-    void heapify_down(vector<int> &nums , int index,int n){
-            
-            while(true){
-                int current=index;
-                int left=2*index+1;
-                int right=2*index+2;
-                if(left<n && nums[left]>nums[current] ){
-                    current=left;
-                }
-                if(right<n && nums[right]>nums[current] ){
-                    current=right;
-                }
-                if(current == index){
-                    break;
-                }
-                swap(nums[current],nums[index]);
-                index=current;
-    
-            }
 
-    }
+
+            
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        int n=nums.size();
-        for(int i=n/2-1;i>=0;i--){
-            heapify_down(nums,i,n);
+        if(k>nums.size()){
+            return -1;
         }
-        int check=0;
-        for(int i=n-1;i>=0;i--){
-            int curr=nums[i];
-            check+=1;
-            if(check==k){
-                return nums[0];
-                break;
+       int n=nums.size();
+      
+        int left=0;
+        int right=n-1;
+         while (left <= right) {
+
+            int pivot_index = left + rand() % (right - left + 1);
+            int pivot = nums[pivot_index];
+
+            // 3-way partition
+            int i = left, lt = left, gt = right;
+
+            while(i<=gt){
+                if(pivot < nums[i]){
+                    swap(nums[lt],nums[i]);
+                    i++; lt++;
+                }else if(pivot > nums[i]){
+                    swap(nums[gt],nums[i]);
+                    gt--;
+                }else{
+                    i++;
+                }
             }
-            
-            nums[i]=nums[0];
-            nums[0]=curr;
-            heapify_down(nums,0,i);
-        }
-        return -1;
-        
+            if(k-1 < lt){
+                right=lt-1;
+            }else if(k-1 > gt){
+                left=gt+1;
+            }else{
+                return pivot;
+            }
+         }
+         return -1;
     }
+    
 };
