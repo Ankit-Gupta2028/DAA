@@ -3,19 +3,12 @@ public:
     vector<int> arrayRankTransform(vector<int>& arr) {
          int n=arr.size();
        unordered_map<int,int> m1;
-       priority_queue<int,vector<int>,greater<int>> p1;
+       vector<int> sorted_array=arr;
+       sort(sorted_array.begin(),sorted_array.end());
+       sorted_array.erase(unique(sorted_array.begin(),sorted_array.end()),sorted_array.end());
 
-       for(int i=0;i<n;i++){
-            if(m1.find(arr[i])==m1.end()){
-                p1.push(arr[i]);
-            }
-            m1[arr[i]]=1;
-       }
-        int rank=1;
-       while(!p1.empty()){
-            m1[p1.top()]=rank;
-            rank++;
-            p1.pop();
+       for(int i=0;i<sorted_array.size();i++){
+             m1[sorted_array[i]]=i+1;
        }
        vector<int> ans;
         for(int i=0;i<n;i++){
