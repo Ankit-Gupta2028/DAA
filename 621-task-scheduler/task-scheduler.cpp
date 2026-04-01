@@ -22,27 +22,30 @@ public:
 
         while(!p1.empty()){
             vector<int> store;
-            int count=0;
+            int cnt=0;
             for(int i=0;i<n+1;i++){
                 if(!p1.empty()){
                     int freq=p1.top();
                     p1.pop();
                     freq--;
-                    
-                    store.push_back(freq);
+                    if(freq>0){
+                        store.push_back(freq);
+                       
+                    }
+                    cnt+=1;
                     
 
                 }
 
             }
             for(int &i: store){
-                if(i>0){
-                    p1.push(i);
-                }
+               
+                p1.push(i);
+                
                 
             }
             if(p1.empty()){
-                ans+=store.size();
+                ans+=cnt;
             }else{
                 ans+=n+1;
             }
