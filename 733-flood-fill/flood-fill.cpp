@@ -8,11 +8,11 @@ class Solution {
     }
     return true;
 }
-void bfs(vector<vector<int>> &image,vector<vector<int>> &vis,int i,int j,int newColor,int curr_colour){
+void bfs(vector<vector<int>> &image,int i,int j,int newColor,int curr_colour){
         int n=image.size();
         int m=image[0].size();
         queue<pair<int,int>> q1;
-        vis[i][j]=1;
+      
         q1.push({i,j});
         image[i][j]=newColor;
         int drow[]={-1,0,1,0};
@@ -29,8 +29,8 @@ void bfs(vector<vector<int>> &image,vector<vector<int>> &vis,int i,int j,int new
               int newcol=col+dcol[i];
 
                 if(isvaild(newrow,newcol,n,m)){
-                    if(image[newrow][newcol]  == curr_colour && vis[newrow][newcol]==0){
-                            vis[newrow][newcol]=1;
+                    if(image[newrow][newcol]  == curr_colour) {
+                            
                             image[newrow][newcol]=newColor;
                             q1.push({newrow,newcol});
                     }
@@ -42,13 +42,17 @@ void bfs(vector<vector<int>> &image,vector<vector<int>> &vis,int i,int j,int new
     }
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+
          int n=image.size();
             int m=image[0].size();
             int curr_colour=image[sr][sc];
-           vector<vector<int>> vis(n,vector<int>(m,0)) ;
+            if(curr_colour==color){
+                return image;
+            }
+           
             
 
-            bfs(image,vis,sr,sc,color,curr_colour);
+            bfs(image,sr,sc,color,curr_colour);
             return image;
     }
 };
