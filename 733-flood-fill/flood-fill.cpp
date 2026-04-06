@@ -8,13 +8,13 @@ class Solution {
     }
     return true;
 }
-void bfs(vector<vector<int>> &image,vector<vector<int>> &vis,int i,int j,int newColor,int curr_colour,vector<vector<int>> &image_demo){
+void bfs(vector<vector<int>> &image,vector<vector<int>> &vis,int i,int j,int newColor,int curr_colour){
         int n=image.size();
         int m=image[0].size();
         queue<pair<int,int>> q1;
         vis[i][j]=1;
         q1.push({i,j});
-        image_demo[i][j]=newColor;
+        image[i][j]=newColor;
         int drow[]={-1,0,1,0};
         int dcol[]={0,1,0,-1};
 
@@ -31,7 +31,7 @@ void bfs(vector<vector<int>> &image,vector<vector<int>> &vis,int i,int j,int new
                 if(isvaild(newrow,newcol,n,m)){
                     if(image[newrow][newcol]  == curr_colour && vis[newrow][newcol]==0){
                             vis[newrow][newcol]=1;
-                            image_demo[newrow][newcol]=newColor;
+                            image[newrow][newcol]=newColor;
                             q1.push({newrow,newcol});
                     }
                 }
@@ -46,9 +46,9 @@ public:
             int m=image[0].size();
             int curr_colour=image[sr][sc];
            vector<vector<int>> vis(n,vector<int>(m,0)) ;
-            vector<vector<int>> image_demo=image;
+            
 
-            bfs(image,vis,sr,sc,color,curr_colour,image_demo);
-            return image_demo;
+            bfs(image,vis,sr,sc,color,curr_colour);
+            return image;
     }
 };
