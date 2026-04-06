@@ -30,6 +30,7 @@ public:
                 
                     if(isConnected[i][j]==1 && i!=j){
                         Adj[i].push_back(j);
+                        Adj[j].push_back(i);
                     }
                 
 
