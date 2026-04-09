@@ -8,21 +8,39 @@ private:
         return false;
     }
     return true;
-    
     }
-    void dfs(vector<vector<int>> &grid,int &min,vector<vector<int>> &visited,queue<pair<int,int>> &q1){
+
+    
+
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
         int n=grid.size();
-        int m=grid[0].size();
+       int m=grid[0].size();
+        queue<pair<int,int>> q1;
+
+       int min=0;
+        int total=0;
+       vector<vector<int>> visited(n,vector<int>(m,0) );
+
+       for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(grid[i][j] != 0){
+                total+=1;
+            }
+            if(grid[i][j]==2){
+                q1.push({i,j});
+            }
+        }
+       }
+       int cnt=0;
+       int time=0;
 
         int drow[]={-1,0,1,0};
         int dcol[]={0,1,0,-1};
 
-        
-        
-
-        while(!q1.empty()){
+       while(!q1.empty()){
             int size=q1.size();
-            min+=1;
+            cnt+=size;
 
             for(int i=0;i<size;i++){
                 auto ele=q1.front();
@@ -38,8 +56,8 @@ private:
               
 
                     if(isvaild(newrow,newcol,n,m)){
-                        if(grid[newrow][newcol]==1 && visited[newrow][newcol]==0){
-                            visited[newrow][newcol]=1;
+                        if(grid[newrow][newcol]==1 ){
+                            grid[newrow][newcol]=2;
                             q1.push({newrow,newcol});
                         }
                     }
@@ -47,39 +65,17 @@ private:
                 }
                 
             }
-        }
-
-
-    }
-public:
-    int orangesRotting(vector<vector<int>>& grid) {
-        int n=grid.size();
-       int m=grid[0].size();
-        queue<pair<int,int>> q1;
-
-       int min=-1;
-       vector<vector<int>> visited(n,vector<int>(m,0) );
-
-       for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(grid[i][j]==2){
-                q1.push({i,j});
+            if(!q1.empty()){
+                time+=1;
             }
         }
-       }
-       dfs(grid,min,visited,q1);
+       
 
-        for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(grid[i][j]==1 && visited[i][j]==0){
-                return -1;
-            }
-        }
+       
+       if(cnt==total){
+        return time;
        }
-       if(min==-1){
-        return 0;
-       }
-       return min;
+       return -1;
 
     }
 };
