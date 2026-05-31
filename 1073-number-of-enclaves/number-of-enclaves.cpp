@@ -10,37 +10,37 @@ private:
     return true;
     
     }
+    void bfs(vector<vector<int>> &grid,vector<vector<int>> &visited,int row,int col){
+        queue<pair<int,int>> q1;
+        q1.push({row,col});
+        visited[row][col]=1;
 
-    void bfs(vector<vector<int>> &grid,vector<vector<int>> &visited,queue<pair<int,int>> &q1){
-
-        int n = grid.size();
+        int n=grid.size();
         int m = grid[0].size();
+
+
 
         int drow[]={-1,0,1,0};
         int dcol[]={0,1,0,-1};
-        
 
         while(!q1.empty()){
-            auto ele=q1.front();
+
+            auto ele = q1.front();
+            int Row = ele.first;
+            int Col = ele.second;
             q1.pop();
-            int Row=ele.first;
-            int Col=ele.second;
 
             for(int i=0;i<4;i++){
-
-                int newrow = Row+drow[i];
+                int newrow=Row+drow[i];
                 int newcol = Col+dcol[i];
-
                 if(isvaild(newrow,newcol,n,m)){
-                    
-                        if(grid[newrow][newcol]==1 && visited[newrow][newcol]==0){
-                            q1.push({newrow,newcol});
-                            visited[newrow][newcol]=1;
-                           
-                        }
-
+                    if(grid[newrow][newcol]==1 && visited[newrow][newcol]==0){
+                        q1.push({newrow,newcol});
+                        visited[newrow][newcol]=1;
+                    }
                 }
-                
+
+
 
             }
         }
@@ -48,35 +48,29 @@ private:
     }
 public:
     int numEnclaves(vector<vector<int>>& grid) {
-        int n = grid.size();
+        int n=grid.size();
         int m = grid[0].size();
 
         vector<vector<int>> visited(n,vector<int>(m,0));
-        queue<pair<int,int>> q1;
-        
 
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-
-                if(grid[i][j]==1 && (i==0 || i==n-1 || j==0 || j==m-1)){
-                    q1.push({i,j});
-                    visited[i][j]=1;
+                if(i==0 || i==n-1 || j==0 || j==m-1){
+                    if(grid[i][j]==1 && visited[i][j]==0){
+                        bfs(grid,visited,i,j);
+                    }
                 }
-
             }
         }
-
-        int count=0;
-        bfs(grid,visited,q1);
+        int enclaves=0;
 
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(grid[i][j]==1 && visited[i][j]==0){
-                    count+=1;
+                    enclaves+=1;
                 }
             }
         }
-
-        return count;
+        return enclaves;
     }
 };
