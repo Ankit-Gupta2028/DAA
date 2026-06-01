@@ -8,74 +8,73 @@ private:
         return false;
     }
     return true;
-    }
-
     
+    }
+    void bfs(vector<vector<int>> &grid,queue<pair<int,int>> &q1,int &min,int &cnt){
 
-public:
-    int orangesRotting(vector<vector<int>>& grid) {
-        int n=grid.size();
+       int n=grid.size();
        int m=grid[0].size();
-        queue<pair<int,int>> q1;
-
-       int min=0;
-        int total=0;
-       vector<vector<int>> visited(n,vector<int>(m,0) );
-
-       for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(grid[i][j] != 0){
-                total+=1;
-            }
-            if(grid[i][j]==2){
-                q1.push({i,j});
-            }
-        }
-       }
-       int cnt=0;
-       int time=0;
-
         int drow[]={-1,0,1,0};
         int dcol[]={0,1,0,-1};
 
        while(!q1.empty()){
-            int size=q1.size();
-            cnt+=size;
+            int qsize=q1.size();
+          
+             cnt+=qsize;
+            for(int i=0;i<qsize;i++){
 
-            for(int i=0;i<size;i++){
                 auto ele=q1.front();
+                int Row=ele.first;
+                int Col=ele.second;
                 q1.pop();
 
-                int row = ele.first;
-                int col = ele.second;
-
                 for(int i=0;i<4;i++){
-
-                    int newrow=row+drow[i];
-                    int newcol=col+dcol[i];
-              
-
+                    int newrow=Row+drow[i];
+                    int newcol=Col+dcol[i];
                     if(isvaild(newrow,newcol,n,m)){
-                        if(grid[newrow][newcol]==1 ){
-                            grid[newrow][newcol]=2;
+                        if(grid[newrow][newcol]==1){
+
                             q1.push({newrow,newcol});
+                            grid[newrow][newcol]=2;
                         }
                     }
-
                 }
                 
             }
             if(!q1.empty()){
-                time+=1;
+                min+=1;
+            }
+           
+       }
+
+    }
+public:
+    int orangesRotting(vector<vector<int>>& grid) {
+          
+       queue<pair<int,int>> q1;
+       int n=grid.size();
+       int m=grid[0].size();
+
+        int total=0;
+
+       for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            if(grid[i][j]!=0){
+                total+=1;
+            }
+            if(grid[i][j]==2){
+                q1.push({i,j});
+    
             }
         }
-       
-
-       
-       if(cnt==total){
-        return time;
        }
-       return -1;
+       int min=0;
+       int cnt=0;
+       bfs(grid,q1,min,cnt);
 
+        if(total==cnt){
+            return min;
+        }
+       return -1;
     }
 };
