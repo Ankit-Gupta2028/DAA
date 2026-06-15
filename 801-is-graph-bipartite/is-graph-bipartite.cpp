@@ -1,42 +1,40 @@
 class Solution {
+bool bfs_color(vector<vector<int>>& graph,int i,vector<int> &color,int newcolor){
 
-bool bfs_color(vector<vector<int>>& adj,int i,vector<int> &color){
-    queue<int> q1;
-    q1.push(i);
-    color[i]=0;
+    color[i]=newcolor;
 
-    while(!q1.empty()){
-        int ele=q1.front();
-        q1.pop();
-
-        for(auto p:adj[ele]){
-            if(color[p]== -1){
-                if(color[ele]==0){
-                    color[p]=1;
-                }else{
-                    color[p]=0;
-                }
-                q1.push(p);
-            }else{
-                if(color[p] == color[ele]){
-                    return false;
-                }
+    for(auto ele: graph[i]){
+        if(color[ele]== -1 ){
+            if(bfs_color(graph,ele,color,!newcolor)== false){
+                return false;
+            }
+        }else{
+            if(color[ele] == newcolor){
+                return false;
             }
         }
+        
     }
+
+
     return true;
 
 }
 public:
     bool isBipartite(vector<vector<int>>& graph) {
-          int n = graph.size();
-        int m = graph[0].size();
-      
-        vector<int> color(n,-1);
+        int V=graph.size();
+        // vector<int> adj[V];
+        // for(int i=0;i<graph.size();i++){
+        //     adj[graph[i][0]].push_back(graph[i][1]);
+        //     adj[graph[i][1]].push_back(graph[i][0]);
+        // }
+        vector<int> visited(V,0);
+        vector<int> color(V,-1);
+        int newcolor=0;
 
-        for(int i=0;i<n;i++){
+        for(int i=0;i<V;i++){
             if(color[i]== -1){
-                if(!bfs_color(graph,i,color)){
+                if(!bfs_color(graph,i,color,newcolor)){
                     return false;
                 }
             }
