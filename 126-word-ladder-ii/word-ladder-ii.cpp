@@ -51,24 +51,15 @@ public:
                     string word2 = word;
                     word2[i]=j;
                     if(s1.find(word2)!= s1.end()){
-                        if(word2 == endWord){
-                            m1[word2]=transformation+1;
-                            check=true;
-                            break;
-                            
-                        }
+                       
                         q1.push({word2,transformation+1});
                         m1[word2]=transformation+1;
                         s1.erase(word2);
                     }
                 }
-                if(check){
-                    break;
-                }
+               
             }
-            if(check){
-                break;
-            }
+           
 
         }
         vector<string> temp;
