@@ -34,8 +34,8 @@ public:
         int delrow[] = {-1, -1, -1, 0, 0, 1, 1, 1};
         int delcol[] = {-1,  0,  1,-1, 1,-1, 0, 1};
        
-        vector<vector<int>> visited(n,vector<int>(m,0));
-        visited[source.first][source.second]== 1;
+        vector<vector<int>> distance(n,vector<int>(m,1e9));
+        distance[source.first][source.second]== 1;
 
         queue<pair<int,pair<int,int>>> q1;
         q1.push({1,{source.first,source.second}});
@@ -56,9 +56,9 @@ public:
                         if(newrow == destination.first && newcol==destination.second){
                             return dis+1;
                         }else{
-                            if(visited[newrow][newcol]== 0){
+                            if(distance[newrow][newcol] > dis+1){
                                 q1.push({dis+1,{newrow,newcol}});
-                                visited[newrow][newcol]= 1;
+                                distance[newrow][newcol]= dis+1;
                             }
                             
                         }
