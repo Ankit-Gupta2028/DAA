@@ -29,6 +29,9 @@ public:
             int row = ele.second.first;
             int col = ele.second.second;
             q1.pop();
+            if(row == n-1 && col == m-1){
+                return effort;
+            }
 
             for(int i=0;i<4;i++){
                 int newrow= delrow[i]+row;
