@@ -26,6 +26,10 @@ public:
             long long time = ele.first;
             q1.pop();
 
+            if(time > min_dist[node]){
+                continue;
+            }
+
            
             for(auto it : adj[node])  {
                 long long new_node = it.first;
