@@ -12,20 +12,8 @@ public:
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 for(int k=0;k<n;k++){
-
-                    if(j==k){
-                        matrix[j][k]=0;
-                    }
-
-                    if(matrix[j][i] == 1e9 || matrix[i][k] == 1e9 ){
-                        continue;
-                    }
-
-                    if(matrix[j][k] == 1e9 ){
-                         matrix[j][k]=matrix[j][i] + matrix[i][k];
-                    }else if(matrix[j][i] + matrix[i][k] <  matrix[j][k]){
-                        matrix[j][k]=matrix[j][i] + matrix[i][k];
-                    }
+                        matrix[j][k]=min(matrix[j][i] + matrix[i][k], matrix[j][k]);
+                    
 
                 }
             }
