@@ -1,7 +1,7 @@
 class DisjointSet {
     
 public:
-    vector<int> rank,parent,Size;
+    vector<int> parent,Size;
     
         int find_parent(int u){
         if(u == parent[u]){
@@ -12,24 +12,21 @@ public:
     DisjointSet(int n) {
 
         parent.resize(n+1,0);
-        rank.resize(n+1,0);
         Size.resize(n+1,1);
+
         for(int i=0;i<=n;i++){
             parent[i]=i;
         }
 
     }
 
-    bool find(int u, int v) {
-        if(find_parent(u) == find_parent(v)){
-            return true;
-        }
-        return false;
-    }
-
     void unionBySize(int u, int v) {
         int parent_u = find_parent(u);
         int parent_v = find_parent(v);
+
+         if(parent_u == parent_v){
+            return;
+        }
 
          if(Size[parent_u] >= Size[parent_v]){
             parent[parent_v]=parent_u;
@@ -55,9 +52,8 @@ public:
             int u = it[0];
             int v = it[1];
 
-            if(dv.find_parent(u) != dv.find_parent(v)){
-                dv.unionBySize(u,v);
-            }
+            dv.unionBySize(u,v);
+            
         }
 
         int ans=0;
