@@ -2,15 +2,16 @@ class Solution {
 void dfs(int node,int parent,int &count,vector<int> adj[],vector<int> &vis,vector<int> &tin, vector<int> &low,vector<vector<int>> &bridges){
 
     vis[node]=1;
+    tin[node]=count;
+    low[node]=count;
+    count+=1;
     for(auto it : adj[node]){
 
         if(it == parent){
             continue;
         }
         if(vis[it]==0){
-            tin[it]=count+1;
-            low[it]=count+1;
-            count+=1;
+           
             dfs(it,node,count,adj,vis,tin,low,bridges);
             
 
