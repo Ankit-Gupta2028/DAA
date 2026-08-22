@@ -1,30 +1,24 @@
 class Solution {
-int max_sum(vector<int>& nums,int n,vector<int> &dp){
 
-    if(n<0){
-        return 0;
-    }
-    if(n==0){
-        return nums[0];
-    }
-
-    if(dp[n] != -1){
-        return dp[n];
-    }
-
-    int pick = nums[n]+max_sum(nums,n-2,dp);
-    int not_pick = 0+max_sum(nums,n-1,dp);
-
-    dp[n] = max(pick,not_pick);
-
-    return max(pick,not_pick);
-
-}
 public:
     int rob(vector<int>& nums) {
         
         int n = nums.size();
-        vector<int> dp(n,-1);
-        return max_sum(nums,n-1,dp);
+        vector<int> dp(n,0);
+        dp[0]=nums[0];
+
+        for(int i=1;i<n;i++){
+            int pick = nums[i];
+
+            if(i>1){
+                pick += dp[i-2];
+            }
+            int not_pick = 0 + dp[i-1];
+
+            dp[i] = max(pick,not_pick);
+        }
+
+
+        return dp[n-1];
     }
 };
