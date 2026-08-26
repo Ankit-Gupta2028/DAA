@@ -1,5 +1,9 @@
 class Solution {
 int min_path(vector<vector<int>>& matrix,int row,int col,int curr_row,int curr_col,vector<vector<int>> &dp){
+
+    if(curr_col < 0 || curr_col > col){
+        return 1e9;
+    }
     if(curr_row == 0 ){
         return matrix[curr_row][curr_col];
     }
@@ -7,22 +11,13 @@ int min_path(vector<vector<int>>& matrix,int row,int col,int curr_row,int curr_c
     if(dp[curr_row][curr_col] != INT_MAX){
         return dp[curr_row][curr_col];
     }
-
-
-    int up = INT_MAX;
-    int up_left = INT_MAX;
-    int up_right = INT_MAX;
     
-    if(curr_row-1 >=0 ){
-        up = matrix[curr_row][curr_col]+min_path(matrix,row,col,curr_row-1,curr_col,dp);
-    }
-     if(curr_row-1 >= 0 && curr_col-1 >= 0){
-        up_left = matrix[curr_row][curr_col]+min_path(matrix,row,col,curr_row-1,curr_col-1,dp);
-    }
-
-     if(curr_row-1 >=0  && curr_col+1 <= col){
-        up_right = matrix[curr_row][curr_col]+min_path(matrix,row,col,curr_row-1,curr_col+1,dp);
-    }
+        int up = matrix[curr_row][curr_col]+min_path(matrix,row,col,curr_row-1,curr_col,dp);
+     
+        int up_left = matrix[curr_row][curr_col]+min_path(matrix,row,col,curr_row-1,curr_col-1,dp);
+    
+        int up_right = matrix[curr_row][curr_col]+min_path(matrix,row,col,curr_row-1,curr_col+1,dp);
+    
 
     return dp[curr_row][curr_col]=min(up,min(up_left,up_right));
 
