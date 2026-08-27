@@ -1,30 +1,31 @@
 class Solution {
-int min_path(vector<vector<int>>& triangle,int curr_row,int curr_col,int row,vector<vector<int>> &dp){
-    if(curr_row  == row -1 ){
-        return triangle[curr_row][curr_col];
-    }
 
-    if(dp[curr_row][curr_col] != INT_MAX){
-        return dp[curr_row][curr_col];
-    }
-   
-
-  
-        int bottom = triangle[curr_row][curr_col]+min_path(triangle,curr_row+1,curr_col,row,dp);
-    
-    
-        int bottom_right = triangle[curr_row][curr_col]+min_path(triangle,curr_row+1,curr_col+1,row,dp);
-    
-    return  dp[curr_row][curr_col] = min(bottom,bottom_right);
-
-}
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
-        int n = triangle.size();
+    int n = triangle.size();
         int m = triangle[n-1].size();
 
-        vector<vector<int>> dp(n,vector<int>(m,INT_MAX));
+      vector<int> dp(n,0);
 
-        return min_path(triangle,0,0,n,dp);
+        for(int i=0;i<n;i++){
+            dp[i] = triangle[n-1][i];
+        }
+
+        for(int i=n-2;i>=0;i--){
+
+            vector<int> temp(n,0);
+
+            for(int j=0;j<triangle[i].size();j++){
+                int bottom = triangle[i][j] + dp[j];
+                int bottom_right = triangle[i][j] + dp[j+1];
+
+                temp[j]= min(bottom,bottom_right);
+            }
+            dp = temp;
+
+        }
+        return dp[0];
+        
+        
     }
 };
