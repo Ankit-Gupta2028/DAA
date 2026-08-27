@@ -2,7 +2,8 @@ class Solution {
 
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
-    int n = triangle.size();
+
+         int n = triangle.size();
         int m = triangle[n-1].size();
 
       vector<int> dp(n,0);
@@ -15,7 +16,7 @@ public:
 
             vector<int> temp(n,0);
 
-            for(int j=0;j<triangle[i].size();j++){
+            for(int j=i;j>=0;j--){
                 int bottom = triangle[i][j] + dp[j];
                 int bottom_right = triangle[i][j] + dp[j+1];
 
