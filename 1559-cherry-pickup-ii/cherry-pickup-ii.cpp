@@ -1,42 +1,55 @@
 class Solution {
-int max_cherry(int row,int col,int r1, int c1,int c2,vector<vector<int>>& matrix,vector<vector<vector<int>>> &dp){
 
-    if( c1 < 0 || c1 > col -1 || c2 < 0 || c2 > col -1 ){
-        return -1e9;
-    }
-    if( r1==row-1  ){
-        if( c1 == c2){
-            return matrix[r1][c1];
-        }else{
-             return matrix[r1][c1]+matrix[r1][c2];
-        }
-    }
-
-    if(dp[r1][c1][c2] != -1){
-        return dp[r1][c1][c2];
-    }
-    int ans = INT_MIN;
-    for(int i = -1;i<=1;i++){
-        for(int j = -1;j<=1;j++){
-            int maxi =0;
-            if( c1 == c2){
-                 maxi = matrix[r1][c1]+max_cherry(row,col,r1+1,c1+i,c2+j,matrix,dp);
-            }else{
-                 maxi = matrix[r1][c1]+matrix[r1][c2]+max_cherry(row,col,r1+1,c1+i,c2+j,matrix,dp);
-            }
-            ans = max(ans,maxi);
-        }
-    }
-    return dp[r1][c1][c2] = ans;
-}
 public:
     int cherryPickup(vector<vector<int>>& grid) {
-          int n = grid.size();
+        int n = grid.size();
         int m = grid[0].size();
 
-        vector<vector<vector<int>>> dp(n,vector<vector<int>>(m,vector<int>(m,-1)));
+        vector<vector<vector<int>>> dp(n,vector<vector<int>>(m,vector<int>(m,0)));
 
-        return max_cherry(n,m,0,0,m-1,grid,dp);
+        for(int i=0;i<m;i++){
+            for(int j=0;j<m;j++){
+                if(i==j){
+                    dp[n-1][i][j] = grid[n-1][i];
+                }
+                    
+                else{
+                     dp[n-1][i][j] =grid[n-1][i] + grid[n-1][j];
+                }
+                    
+            }
+        }
+
+        for(int i=n-2;i>=0;i--){
+            for(int r1=0;r1<m;r1++){
+                for(int r2=0;r2<m;r2++){
+
+                    int maxi = INT_MIN;
+
+                    for(int j1=-1;j1<=1;j1++){
+                        for(int j2 =-1; j2<=1;j2++){
+
+                            int ans;
+                            if(r1 == r2 ){
+                                ans = grid[i][r1];
+                            }else{
+                                ans =grid[i][r1]+grid[i][r2];
+                            }
+
+                            if((r1+j1 < 0 || r1+j1 >= m) || (r2+j2 < 0 || r2+j2 >= m)){
+                                ans += -1e9;
+                            }else{
+                                ans += dp[i+1][r1+j1][r2+j2];
+                            }
+                            maxi = max(maxi,ans);
+                        }
+                    }
+                    dp[i][r1][r2]=maxi;
+                }
+            }
+        }
+        return dp[0][0][m-1];
+
 
     }
 };
