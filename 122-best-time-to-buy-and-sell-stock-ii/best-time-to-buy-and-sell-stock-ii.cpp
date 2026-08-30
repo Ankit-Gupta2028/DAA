@@ -1,31 +1,27 @@
 class Solution {
-int max_profit(int buy,int index,vector<int> &arr,int n,vector<vector<int>> &dp){
+int max_profit(vector<int> &arr,int n, vector<int> &dp){
 
-    if(index == n){
-        return 0;
+    for(int i=n-1;i>=0;i--){
+        vector<int> temp(2,0);
+        for(int buy = 0;buy<=1;buy++){
+            int profit = 0;
+            if(buy == 0){
+                profit = max((-1)*arr[i]+dp[buy+1],dp[buy]);
+            }else{
+                profit = max(arr[i]+dp[buy-1],dp[buy]);
+            }
+            temp[buy]=profit;
+        }
+        dp = temp;
     }
-    if(dp[index][buy] != -1){
-        return dp[index][buy];
-    }
-    int profit = 0;
-    if(buy == 0){
-        profit = max(0 + max_profit(0,index+1,arr,n,dp),  (-1)*arr[index]+max_profit(1,index+1,arr,n,dp));
-        
-    }
-    if(buy == 1){
-        profit = max(arr[index]+ max_profit(0,index+1,arr,n,dp), 0+max_profit(1,index+1,arr,n,dp));
-    }
-    return dp[index][buy] = profit;
+    return  dp[0];
 } 
 public:
     int maxProfit(vector<int>& prices) {
 
+        vector<int> dp(2,0);
+        int n = prices.size();
 
-       int n = prices.size(); 
-       if(n == 0){
-        return 0;
-       }
-        vector<vector<int>> dp(n,vector<int>(2,-1));
-        return max_profit(0,0,prices,n,dp);
+        return max_profit(prices,n,dp);
     }
 };
