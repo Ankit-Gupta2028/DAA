@@ -22,6 +22,9 @@ public:
 
 
        int n = prices.size(); 
+       if(n == 0){
+        return 0;
+       }
         vector<vector<int>> dp(n,vector<int>(2,-1));
         return max_profit(0,0,prices,n,dp);
     }
