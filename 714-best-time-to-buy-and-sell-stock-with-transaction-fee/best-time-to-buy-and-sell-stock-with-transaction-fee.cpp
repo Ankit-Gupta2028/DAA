@@ -11,12 +11,12 @@ int max_profit(int buy,int index ,int &n,vector<int> &arr,vector<vector<int>> &d
 
     if(buy == 0){
         profit = max(0+max_profit(0,index+1,n,arr,dp,fee), 
-        (-1)*arr[index]+max_profit(1,index+1,n,arr,dp,fee));
+        (-1)*arr[index]-fee+max_profit(1,index+1,n,arr,dp,fee));
     }
 
     if(buy == 1){
         profit = max(0 + max_profit(1,index+1,n,arr,dp,fee),
-        arr[index]-fee+max_profit(0,index+1,n,arr,dp,fee));
+        arr[index]+max_profit(0,index+1,n,arr,dp,fee));
     }
 
     return dp[index][buy]=profit;
