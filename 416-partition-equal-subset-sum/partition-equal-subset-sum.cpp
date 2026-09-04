@@ -1,30 +1,11 @@
 class Solution {
-bool equal_subset(int index, vector<int> &arr,int n, vector<vector<int>> &dp, int k) {
-    if(k==0){
-        return true;
-    }
-    if(index == n){
-        return false;
-    }
-    if(dp[index][k] != -1){
-        return dp[index][k];
-    }
 
-    int take = false;
-    if(arr[index] <= k){
-        take = equal_subset(index+1,arr,n,dp,k-arr[index]);
-    }
-
-    int not_take = equal_subset(index+1,arr,n,dp,k);
-
-    return dp[index][k] = take || not_take;
-    
-}
 public:
     bool canPartition(vector<int>& nums) {
 
         int n = nums.size();
-         if(n == 1){
+
+       if(n == 1){
             return false;
         }
         int sum = 0;
@@ -36,9 +17,26 @@ public:
         }
         int k = sum /2;
 
-        vector<vector<int>> dp(n,vector<int>(k+1,-1));
+        vector<vector<int>> dp(n+1,vector<int>(k+1,0));
 
-        return equal_subset(0, nums,n,dp,k);
+        for(int i=0;i<=n;i++){
+            dp[i][0] = 1;
+        }
+
+        for(int i= n-1;i>=0;i--){
+
+            for(int target=0;target<=k;target++){
+                int not_take = dp[i+1][target];
+
+                int take = false;
+                if( nums[i] <= target){
+                    take= dp[i+1][target - nums[i]];
+                }
+                dp[i][target] = take || not_take;
+            }
+        }
+
+        return dp[0][k];
 
     }
 };
