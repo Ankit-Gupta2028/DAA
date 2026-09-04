@@ -5,38 +5,41 @@ public:
 
         int n = nums.size();
 
-       if(n == 1){
+       
+        if(n == 1){
             return false;
         }
         int sum = 0;
         for(int i=0;i<n;i++){
-            sum +=  nums[i];
+            sum += nums[i];
         }
         if(sum % 2 == 1 ){
             return false;
         }
         int k = sum /2;
 
-        vector<vector<int>> dp(n+1,vector<int>(k+1,0));
+        vector<int> dp(k+1,0);
 
-        for(int i=0;i<=n;i++){
-            dp[i][0] = 1;
-        }
+        dp[0]=1;
 
         for(int i= n-1;i>=0;i--){
+            vector<int> temp(k+1,0);
+            temp[0]=1;
 
             for(int target=0;target<=k;target++){
-                int not_take = dp[i+1][target];
+                int not_take = dp[target];
 
                 int take = false;
-                if( nums[i] <= target){
-                    take= dp[i+1][target - nums[i]];
+                if(nums[i] <= target){
+                    take = dp[target-nums[i]];
                 }
-                dp[i][target] = take || not_take;
+                temp[target] = take || not_take;
             }
+            dp = temp;
         }
 
-        return dp[0][k];
+        return dp[k];
+
 
     }
 };
