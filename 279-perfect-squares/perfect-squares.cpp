@@ -30,9 +30,31 @@ public:
         }
 
         int N = nums.size();
-        vector<vector<int>> dp(N,vector<int>(n+1,-1));
+        vector<vector<int>> dp(N,vector<int>(n+1,0));
 
-        return least_num(N-1,nums,dp,n);
+        for(int i=0;i<=n;i++){
+            if(i % nums[0] == 0){
+                dp[0][i]= i / nums[0];
+            }else{
+                dp[0][i]=1e9;
+            }
+        }
+
+        for(int index = 1;index<N;index++){
+            for(int target = 0;target<=n;target++){
+                int not_take = dp[index-1][target];
+
+                 int take = 1e9;
+                 if(target >= nums[index]){
+                    take = 1+ dp[index][target - nums[index]];
+                }
+
+                dp[index][target] = min(take ,not_take);
+            }
+        }
+        return dp[N-1][n];
+
+        
 
     }
 };
