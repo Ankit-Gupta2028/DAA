@@ -6,7 +6,7 @@ public:
 
         int N = sqrt(n);
         vector<int> dp(n+1,1e9);
-         vector<int> temp(n+1,1e9);
+       
 
         dp[0] = 0;
         
@@ -17,6 +17,7 @@ public:
         }
 
         for(int index = 2; index <= N; index++){
+              vector<int> temp(n+1,1e9);
             temp[0]=0;
             for(int target = 1; target <= n; target++){
                 int not_take = dp[target];
