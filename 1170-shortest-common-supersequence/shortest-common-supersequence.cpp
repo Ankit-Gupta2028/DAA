@@ -1,10 +1,12 @@
 class Solution {
-    vector<vector<int>> lcs(string &str1, string &str2,vector<vector<int>> &dp) {
 
-        int s1 = str1.size();
+public:
+    string shortestCommonSupersequence(string str1, string str2) {
+         int s1 = str1.size();
         int s2 = str2.size();
 
-        
+        vector<vector<int>> dp(s1+1,vector<int>(s2+1,0));
+       
 
         for(int index1=1;index1<=s1;index1++){
             for(int index2=1;index2<=s2;index2++){
@@ -21,18 +23,6 @@ class Solution {
             }
 
         }
-        return dp;
-        
-
-    }
-public:
-    string shortestCommonSupersequence(string str1, string str2) {
-         int s1 = str1.size();
-        int s2 = str2.size();
-
-        vector<vector<int>> dp(s1+1,vector<int>(s2+1,0));
-        lcs(str1,str2,dp);
-       
 
         int i = s1;
         int j = s2;
