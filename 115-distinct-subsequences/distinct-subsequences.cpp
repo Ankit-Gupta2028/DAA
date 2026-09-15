@@ -1,10 +1,7 @@
 class Solution {
-    int modeule = 1e9 + 7;
+        int modeule = 1e9 + 7;
     int Distinct_subsequences(string &s, string &t,int index1,int index2,vector<vector<int>> &dp){
 
-        if(index2 < 0){
-            return 1;
-        }
         if(index1 < 0){
             return 0;
         }
@@ -25,13 +22,10 @@ class Solution {
         
         if(s[index1] == t[index2]){
             match = Distinct_subsequences(s,t,index1-1,index2-1,dp);
-            not_match = Distinct_subsequences(s,t,index1-1,index2,dp);
-            return dp[index1][index2] = (match+not_match) %modeule;
         }
-        return dp[index1][index2] = Distinct_subsequences(s,t,index1-1,index2,dp);
-        
+        not_match = Distinct_subsequences(s,t,index1-1,index2,dp);
 
-        
+        return dp[index1][index2] = (match+not_match) %modeule;
     }
 public:
     int numDistinct(string s, string t) {
