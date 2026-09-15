@@ -2,17 +2,12 @@ class Solution {
         int modeule = 1e9 + 7;
     int Distinct_subsequences(string &s, string &t,int index1,int index2,vector<vector<int>> &dp){
 
-        if(index1 < 0){
-            return 0;
+        if(index2 < 0){
+            return 1;
         }
-        if(index2 == 0 ){
-            int count = 0;
-           for(int i=index1;i>=0;i--){
-            if(t[0] == s[i]){
-                count+=1;
-            }
-           }
-           return count;
+        if(index1 < 0 ){
+            
+           return 0;
         }
         if(dp[index1][index2] != -1){
             return dp[index1][index2];
