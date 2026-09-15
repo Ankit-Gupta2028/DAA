@@ -1,34 +1,35 @@
 class Solution {
         int modeule = 1e9 + 7;
-    int Distinct_subsequences(string &s, string &t,int index1,int index2,vector<vector<int>> &dp){
 
-        if(index2 < 0){
-            return 1;
-        }
-        if(index1 < 0 ){
-            
-           return 0;
-        }
-        if(dp[index1][index2] != -1){
-            return dp[index1][index2];
-        }
-        int match = 0;
-        int not_match = 0;
-        
-        if(s[index1] == t[index2]){
-            match = Distinct_subsequences(s,t,index1-1,index2-1,dp);
-        }
-        not_match = Distinct_subsequences(s,t,index1-1,index2,dp);
-
-        return dp[index1][index2] = (match+not_match) %modeule;
-    }
 public:
     int numDistinct(string s, string t) {
-        int s1 = s.size();
-       int s2 = t.size();
+       int index1 = s.size();
+       int index2 = t.size();
 
-       vector<vector<int>> dp(s1,vector<int>(s2,-1));
+       vector<vector<int>> dp(index1+1,vector<int>(index2+1,0));
 
-       return Distinct_subsequences(s,t,s1-1,s2-1,dp);
+        for(int i=0;i<=index1;i++){
+            dp[i][0] = 1;
+        }
+        for(int i=1;i<=index2;i++){
+            dp[0][i] = 0;
+        }
+       
+        for(int i=1;i<=index1;i++){
+            for(int j = 1;j<=index2;j++){
+
+                if(s[i-1] == t[j-1]){
+
+                    dp[i][j] = (dp[i-1][j-1] + dp[i-1][j]) % modeule;
+
+                }else{
+
+                    dp[i][j] = dp[i-1][j];
+
+                }
+            }
+        }
+        return dp[index1][index2];
+
     }
 };
