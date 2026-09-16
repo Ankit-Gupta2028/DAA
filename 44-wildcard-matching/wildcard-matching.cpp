@@ -4,6 +4,9 @@ bool Wildcard_matching(int index1,int index2,string &str, string &pat, vector<ve
         return true;
     }
     if(index1 >= 0 && index2 < 0){
+        if(pat[0] == '*'){
+            return true;
+        }
         return false;
     }
     if(index1 < 0 && index2 >=0){
