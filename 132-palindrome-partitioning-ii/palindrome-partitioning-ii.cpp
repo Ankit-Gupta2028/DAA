@@ -11,15 +11,15 @@ bool ispalindrome(int i,int j,string &s){
     }
     return true;
 }
-int Palindrome_partitioning_II(int i,int j,string &s,vector<vector<int>> &dp){
+int Palindrome_partitioning_II(int i,int j,string &s,vector<int> &dp){
     if(i > j){
         return 0;
     }
     if(ispalindrome(i,j,s)){
         return 0;
     }
-    if(dp[i][j] != -1){
-        return dp[i][j];
+    if(dp[i] != -1){
+        return dp[i];
     }
     int mini = INT_MAX;
 
@@ -30,14 +30,15 @@ int Palindrome_partitioning_II(int i,int j,string &s,vector<vector<int>> &dp){
         }
        
     }
-    return dp[i][j]=mini;
+    return dp[i]=mini;
 }
 public:
     int minCut(string s) {
             		
-        int n = s.size();
-        vector<vector<int>> dp(n,vector<int>(n,-1));
-
+         int n = s.size();
+       vector<int> dp(n,-1);
+        
+        
         return Palindrome_partitioning_II(0,n-1,s,dp);
     }
 };
