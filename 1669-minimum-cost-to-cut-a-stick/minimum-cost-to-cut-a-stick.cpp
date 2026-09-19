@@ -1,5 +1,5 @@
 class Solution {
-int Minimum_cost_to_cut_the_stick(int i,int j,int start_wood,int end_wood,vector<int>& cuts,vector<vector<int>> &dp){
+int Minimum_cost_to_cut_the_stick(int i,int j,vector<int>& cuts,vector<vector<int>> &dp){
 
     if(i > j){
         return 0;
@@ -12,7 +12,7 @@ int Minimum_cost_to_cut_the_stick(int i,int j,int start_wood,int end_wood,vector
     int mini = INT_MAX ;
     for(int k=i;k<=j;k++){
 
-        int ans = (end_wood - start_wood) + Minimum_cost_to_cut_the_stick(i,k-1,start_wood,cuts[k],cuts,dp)+ Minimum_cost_to_cut_the_stick(k+1,j,cuts[k],end_wood,cuts,dp);
+        int ans = (cuts[j+1] - cuts[i-1]) + Minimum_cost_to_cut_the_stick(i,k-1,cuts,dp)+ Minimum_cost_to_cut_the_stick(k+1,j,cuts,dp);
 
         mini = min(ans,mini);
     }
@@ -20,12 +20,16 @@ int Minimum_cost_to_cut_the_stick(int i,int j,int start_wood,int end_wood,vector
 }
 public:
     int minCost(int n, vector<int>& cuts) {
+       
         int N = cuts.size();
+        cuts.push_back(0);
+        cuts.push_back(n);
+
         sort(cuts.begin(), cuts.end());
 
-        vector<vector<int>> dp(N,vector<int>(N,-1));
+        vector<vector<int>> dp(N+2,vector<int>(N+2,-1));
 
-       return Minimum_cost_to_cut_the_stick(0,N-1,0,n,cuts,dp);
+       return Minimum_cost_to_cut_the_stick(1,N,cuts,dp);
 
     }
 };
