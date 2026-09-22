@@ -1,27 +1,35 @@
 class Solution {
+bool check (char s){
+    if ((s >= 'a' && s <= 'z') ||
+            (s >= 'A' && s <= 'Z') ||
+            (s >= '0' && s <= '9')) {
+            return true;
+        }
+        return false;
+}
 public:
     bool isPalindrome(string s) {
-    string result = "";
-
-    for (int i = 0; i < s.length(); i++) {
-        if ((s[i] >= 'a' && s[i] <= 'z') ||
-            (s[i] >= 'A' && s[i] <= 'Z') ||
-            (s[i] >= '0' && s[i] <= '9')) {
-            result += s[i];
-        }
-    }
-    for (int i = 0; i < result.length(); i++) {
-        result[i] = tolower(result[i]);
-    }
-        int n = result.size();
-            int i = 0;
-            int j = n-1;
+        int n = s.size();
+        int i = 0;
+        int j = n-1;
+        
             while(i < j ){
-                if(result[i] != result[j]){
-                    return false;
+                char left = tolower(s[i]);
+                char right = tolower(s[j]);
+
+                if(!check(left)){
+                    i++;
+                }else if(!check(right)){
+                    j--;
+
+                }else{
+                    if(left != right){
+                        return false;
+                    }
+                    i++;
+                    j--;
                 }
-                i++;
-                j--;
+              
             }
             return true;
     }
