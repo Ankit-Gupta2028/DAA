@@ -9,8 +9,9 @@ public:
         for(int i=0;i<n;i++){
             if(s[i] == '('){
                 check +=1;
-                max_depth = max(max_depth,check);
+               
             }else if(s[i] == ')'){
+                max_depth = max(max_depth,check);
                 check -=1;
             }
         }
