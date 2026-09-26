@@ -13,10 +13,10 @@ public:
                 int Max = INT_MIN;
                 int Min = INT_MAX;
 
-                for(int i=0;i<26;i++){
-                    if(freq[i] > 0){
-                        Max = max(Max,freq[i]);
-                        Min = min(Min,freq[i]);
+                for(int k=0;k<26;k++){
+                    if(freq[k] > 0){
+                        Max = max(Max,freq[k]);
+                        Min = min(Min,freq[k]);
                     }
                 }
                 beauty += Max-Min;
