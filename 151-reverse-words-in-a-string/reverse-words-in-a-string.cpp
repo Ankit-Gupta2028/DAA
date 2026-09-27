@@ -1,31 +1,47 @@
 class Solution {
+void reverse_string(int start,int end,string &s){
+    while(start <= end){
+        swap(s[start],s[end]);
+        start++;
+        end--;
+    }
+}
 public:
     string reverseWords(string s) {
         int n = s.size();
-       int last_change = n;
-       string ans;
+       
+       reverse_string(0,n-1,s);
+       
+       int i=0;
+       int j=0; 
+       int start = 0;
+       int end = 0;
 
-       for(int i=n-1;i>=0;i--){
-            if(s[i] == ' '){
-                if(last_change > i+1){
-                    if(!ans.empty()){
-                        ans+=" ";
-                    }
-                
-                    ans += s.substr(i+1,last_change-i-1);
-                }
-               
-                last_change = i;
+        while(j < n){
+            while(j<n && s[j]== ' '){
+                j++;
             }
-            
-       }
-       if(last_change > 0){
-            if(!ans.empty()){
-                ans+=" ";
+            if( j==n){
+                break;
             }
-            ans += s.substr(0,last_change);
-     
-       }
-         return ans;
+            start = i;
+
+            while(j<n && s[j]!= ' ' ){
+                s[i] = s[j];
+                i++;
+                j++;
+            }
+            end = i - 1;
+            reverse_string(start,end,s);
+
+            if(j < n){
+                s[i] = ' ';
+                i++;
+            }
+        }
+        if(i>0 && s[i-1] == ' '){
+            i--;
+        }
+        return s.substr(0,i);
     }
 };
