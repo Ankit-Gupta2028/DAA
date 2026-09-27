@@ -12,12 +12,8 @@ public:
             if(s[i] == '['){
                 open +=1;
             }
-            if(s[i] == ']'){
-                
-                if(open > 0){
+            else if(open > 0){
                     open -=1;
-                    
-                }
             }
         }
         
