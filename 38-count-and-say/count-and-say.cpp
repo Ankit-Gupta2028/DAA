@@ -1,9 +1,12 @@
 class Solution {
 public:
     string countAndSay(int n) {
-        
+
         string curr = "";
         string prev = "1";
+        if(n == 1){
+            return prev;
+        }
         
         int count;
         char prev_char;
