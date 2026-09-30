@@ -21,7 +21,7 @@ bool search(string pat, string txt) {
             cur_prime = (cur_prime * prime) % mod;
         }
 
-        vector <int> ans;
+     
        
         for(int i=0;i<=m - n;i++){
              if( hash_text == hash_pat){
