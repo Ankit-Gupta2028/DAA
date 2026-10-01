@@ -24,7 +24,7 @@ vector <int> KMP(string s){
 public:
     string shortestPalindrome(string s) {
           
-        int n = s.size();
+       int n = s.size();
         string duplicated = s;
         reverse(duplicated.begin(),duplicated.end());
 
@@ -34,9 +34,9 @@ public:
 
         int equal_char = lps.back();
 
-        string rem_char = s.substr(equal_char,n-equal_char);
+        string rem_char = duplicated.substr(0,n-equal_char);
 
-        reverse(rem_char.begin(),rem_char.end());
+        
 
         return rem_char + s;
 
