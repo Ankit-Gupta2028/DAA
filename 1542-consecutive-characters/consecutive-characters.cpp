@@ -10,12 +10,14 @@ public:
         for(int i=1; i<n; i++){
             if(s[i] == prev_char  ){
                 count +=1;
-                MaxPower = max(count,MaxPower);
+                
             }else{
+                MaxPower = max(count,MaxPower);
                 prev_char = s[i];
                 count = 1;
             }
         }
+        MaxPower = max(count,MaxPower);
         return MaxPower;
 
     }
