@@ -11,8 +11,8 @@ public:
         int n = nums.size();
 
         k = k%n;
-        swap1(n-k,n-1,nums);
-        swap1(0,n-k-1,nums);
         swap1(0,n-1,nums);
+        swap1(0,k-1,nums);
+        swap1(k,n-1,nums);
     }
 };
