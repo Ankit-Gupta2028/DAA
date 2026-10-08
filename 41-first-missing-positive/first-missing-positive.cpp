@@ -7,7 +7,7 @@ public:
         while(i<n){
             if(nums[i] > 0 && nums[i] <= n){
                 // correct index check // duplicate check
-                if(nums[i]-1 != i && nums[nums[i] - 1] != nums[i]){
+                if(nums[nums[i] - 1] != nums[i]){
                     
                     
                     swap(nums[i] , nums[nums[i] - 1] );
