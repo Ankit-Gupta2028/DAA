@@ -20,10 +20,6 @@ public:
         }
 
         count = 0;
-        if(nums[0] == ans){
-             count += 1;
-        }
-     
         int i = 0;
 
         while( i < n){
