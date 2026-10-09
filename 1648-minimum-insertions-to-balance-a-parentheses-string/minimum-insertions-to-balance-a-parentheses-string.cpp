@@ -8,40 +8,26 @@ public:
         int i=0;
         
         while(i<n){
+
             if(s[i] == '('){
                 open ++;
+
             }else{
-                if(i+1 < n){
-                    if(s[i+1] == ')' && open > 0){
-                        i+=1;
-                        open -=1;
-                       
-                    }else if(s[i+1] == ')' && open  == 0){
-                        ans +=1;
-                        i+=1;
-                    }else if(s[i+1] != ')' && open > 0){
-                        ans +=1;
-                        open -=1;
-                    }else if(s[i+1] != ')' && open  == 0){
-                        ans +=2;
-                    }
+
+                if(i+1 < n && s[i+1] == ')' ){
+                    i++;
                 }else{
-                    if(open > 0){
-                        ans +=1;
-                        open -=1;
-                    }else{
-                        ans +=2;
-                    }
+                    ans++;
+                }
+
+                if(open > 0){
+                    open -=1;
+                }else{
+                    ans +=1;
                 }
             }
             i++;
         }
-
-
-        
-        
-       
-      
 
         return ans + (2*open);
     }
