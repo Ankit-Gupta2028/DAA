@@ -9,13 +9,16 @@ public:
 
         int i=0;
         int j = n-1;
+       long long right_side = 0;
+       long long leftside = 0;
         long long ans = 0;
         while(i < j){
-            ans += (nums[j] * nums[j]);
-            ans -= (nums[i] * nums[i]);
+           right_side += (nums[j] * nums[j]);
+            leftside += (nums[i] * nums[i]);
             i++;
             j--;
         }
+        ans += right_side- leftside;
         if(n%2 == 0){
             return ans;
         }
