@@ -5,16 +5,15 @@ public:
         if(sum == 0 || sum > 9*num){
             return "";
         }
-        string ans = "";
-        while(num !=0){
-            int digit = min(9,sum);
-            ans += to_string(digit);
-            sum -= digit;
-            num--;
+        int nines = sum/9;
+        int remain = sum%9;
+        string ans (nines,'9');
+
+        
+        if(remain > 0){
+            ans.push_back(remain + '0');
         }
-        if(sum != 0){
-            return "";
-        }
+        ans.append(num - ans.size(), '0');
         return ans;
     }
 };
