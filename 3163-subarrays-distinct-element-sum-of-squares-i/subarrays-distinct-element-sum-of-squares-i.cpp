@@ -8,15 +8,15 @@ public:
 
 
         for(int i=0;i<n;i++){
-            set<int> s1;
+            unordered_set<int> s1;
             for(int j=i;j<n;j++){
                 s1.insert(nums[j]);
-                ans += s1.size()*s1.size();
+                int curr = s1.size();
+                ans += curr*curr;
             }
             
         }
         
-
         return ans;
     }
 };
