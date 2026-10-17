@@ -4,7 +4,7 @@ public:
         
         int k=0,j=1;
         int n=nums.size();
-        vector<int> ans(n,0);
+        vector<int> ans(n);
         for(int i=0;i<nums.size();i++){
 
             if(nums[i] >=0){
