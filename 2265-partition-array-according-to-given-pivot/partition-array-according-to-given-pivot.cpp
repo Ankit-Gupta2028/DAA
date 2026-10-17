@@ -3,29 +3,29 @@ public:
     vector<int> pivotArray(vector<int>& nums, int pivot) {
 
         int n = nums.size();
-        vector<int> ans(n,0);
-        int curr = 0;
-    
-        
+        int i=0;
+        int j=n-1;
+        vector<int> ans(n);
 
-        for(int i=0;i<n;i++){
+        int left = 0;
+        int right = n-1;
+
+        while(i<n){
+
             if(nums[i] < pivot){
-                ans[curr] = nums[i];
-                curr++;
+                ans[left] = nums[i];
+                left ++;
             }
+            if(nums[j] > pivot){
+                ans[right] = nums[j];
+                right--;
+            }
+            i++;
+            j--;
         }
-
-        for(int i=0;i<n;i++){
-            if(nums[i] == pivot){
-                ans[curr] = nums[i];
-                curr++;
-            }
-        }
-        for(int i=0;i<n;i++){
-            if(nums[i] > pivot){
-                ans[curr] = nums[i];
-                curr++;
-            }
+        while(left <= right){
+            ans[left] = pivot;
+            left++;
         }
         return ans;
         
