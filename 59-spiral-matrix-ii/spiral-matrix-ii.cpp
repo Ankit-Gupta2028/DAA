@@ -10,27 +10,27 @@ public:
         while(top<=bottom && left<=right){
 
           for(int i=left;i<=right;i++){
-            ans[top][i] = count;
-            count+=1;
+            ans[top][i] = count++;
+            
           }
           top++;
           for(int i=top;i<=bottom;i++){
-            ans[i][right] = count;
-            count+=1;
+            ans[i][right] = count++;
+          
           }
           right--;
           if(top<=bottom){
              for(int i=right;i>=left;i--){
-                ans[bottom][i] = count;
-                count+=1;
+                ans[bottom][i] = count++;
+        
             }
             bottom--;
           }
          
          if(left <= right){
             for(int i=bottom;i>=top;i--){
-                ans[i][left]  = count;
-                count+=1;
+                ans[i][left]  = count++;
+       
             }
             left++;
          }
