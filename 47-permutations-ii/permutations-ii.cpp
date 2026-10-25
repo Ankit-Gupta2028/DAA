@@ -1,17 +1,20 @@
 class Solution {
-void nextPermutations(int ind,vector<int>&nums, set<vector<int>> &st){
+void nextPermutations(int ind,vector<int>&nums, vector<vector<int>> &ans){
     if(ind == nums.size()){
-        st.insert(nums);
+        ans.push_back(nums);
         return;
     }
+    set<int> st;
     for(int i=ind;i<nums.size();i++){
+
+        if(st.find(nums[i]) != st.end()){
+            continue;
+        }
+            st.insert(nums[i]);
        
             swap(nums[i],nums[ind]);
-            nextPermutations(ind+1,nums,st);
+            nextPermutations(ind+1,nums,ans);
             swap(nums[i],nums[ind]);
-        
-        
-
 
     }
 }
@@ -19,11 +22,9 @@ public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         
         vector<vector<int>> ans;
-        set<vector<int>> st;
-        nextPermutations(0,nums,st);
-        for(auto &it : st){
-            ans.push_back(it);
-        }
+        
+        nextPermutations(0,nums,ans);
+       
         return ans;
     }
 };
