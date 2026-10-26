@@ -34,7 +34,7 @@ public:
         if(cnt1 >= MINI){
             ans.push_back(ele1);
         }
-        if(cnt2 >= MINI){
+        if(cnt2 >= MINI && ele1!=ele2){
             ans.push_back(ele2);
         }
         return ans;
